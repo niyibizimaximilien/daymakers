@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daymakers Edutainment - Rwandan Comedy Group</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #ff6b35;
+            --secondary: #2d46b9;
+            --accent: #f9c80e;
+            --dark: #1e1e2a;
+            --light: #f8f8f8;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Page Container */
+        #page-container {
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: rgba(30, 30, 42, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            top: 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-text {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+        
+        .logo-highlight {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after, .nav-links a.active:after {
+            width: 100%;
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: white;
+            transition: var(--transition);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 25%;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        
+        .about-image.in-view {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Members Section */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .member-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .member-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .member-card:hover .member-image img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-info h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        /* Shows Section */
+        .shows-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .show-card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .show-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .show-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .show-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .show-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .show-card:hover .show-image img {
+            transform: scale(1.1);
+        }
+        
+        .show-info {
+            padding: 1.5rem;
+        }
+        
+        /* Contact Form */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .contact-info h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .contact-details {
+            margin-top: 2rem;
+        }
+        
+        .contact-details p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--primary);
+            width: 20px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                gap: 0;
+                flex-direction: column;
+                background-color: var(--dark);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 1.5rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span class="logo-text">Day<span class="logo-highlight">Makers</span></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a class="nav-link active" data-page="home">Home</a></li>
+                    <li><a class="nav-link" data-page="about">About</a></li>
+                    <li><a class="nav-link" data-page="members">Members</a></li>
+                    <li><a class="nav-link" data-page="shows">Shows</a></li>
+                    <li><a class="nav-link" data-page="contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Container -->
+    <div id="page-container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Daymakers Edutainment</h1>
+                        <p>Rwanda's Premier Comedy & Entertainment Group - Making a Difference Through Laughter</p>
+                        <button class="btn" data-page="about">Discover Our Story</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Section -->
+            <section class="featured">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Why We Matter</h2>
+                    </div>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>Daymakers Edutainment changed the game by showing comedy isn't just for laughs — it can educate, raise awareness, and inspire change.</p>
+                            <p>Our phrase "Bigomba Guhinduka" became popular, used even outside comedy. We give Rwandans a fresh form of entertainment that feels both fun and meaningful.</p>
+                            <button class="btn" data-page="shows">View Our Shows</button>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://images.unsplash.com/photo-1588200908342-23b585c03e26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Daymakers Performance">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <section class="about">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>About Us</h2>
+                    </div>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h3>Mixing Education with Entertainment</h3>
+                            <p>Daymakers Edutainment is a Rwandan comedy and entertainment group that creatively blends education with entertainment. Our mission is to make people laugh while passing along important messages about society, culture, and positive change.</p>
+                            <p>Founded by Clapton Kibonke, the group has become one of Rwanda's most recognized comedy brands, known for our signature show "Bigomba Guhinduka" (which means "things must change").</p>
+                            <p>Through live performances and social media skits, we tackle everyday struggles, habits, and behaviors that need improvement, all while keeping our audience thoroughly entertained.</p>
+                            <h3>Our Challenges</h3>
+                            <p>Like any growing organization, we've faced internal conflicts, especially over money and contracts. Some members left the group because of disagreements with leadership. But even with these splits, the Daymakers brand has stayed respected in Rwanda.</p>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://images.unsplash.com/photo-1551818255-e6e109cbc9cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80" alt="Daymakers Team">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Members Page -->
+        <div id="members" class="page">
+            <section class="members">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Our Members</h2>
+                    </div>
+                    <div class="members-grid">
+                        <div class="member-card">
+                            <div class="member-image">
+                                <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Clapton Kibonke">
+                            </div>
+                            <div class="member-info">
+                                <h3>Clapton Kibonke</h3>
+                                <div class="member-role">Founder & Leader</div>
+                                <p>The visionary behind Daymakers Edutainment, Clapton leads the group with creativity and passion.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="member-card">
+                            <div class="member-image">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Makanika">
+                            </div>
+                            <div class="member-info">
+                                <h3>Makanika</h3>
+                                <div class="member-role">Core Member</div>
+                                <p>Known for his impeccable timing and relatable characters, Makanika brings stories to life on stage.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="member-card">
+                            <div class="member-image">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Divine">
+                            </div>
+                            <div class="member-info">
+                                <h3>Divine</h3>
+                                <div class="member-role">Core Member</div>
+                                <p>Divine's performances are both hilarious and thought-provoking, often addressing social issues.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="member-card">
+                            <div class="member-image">
+                                <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Nimu Roger">
+                            </div>
+                            <div class="member-info">
+                                <h3>Nimu Roger</h3>
+                                <div class="member-role">Core Member</div>
+                                <p>Roger's physical comedy and expressive performances have made him a fan favorite.</p>
+                            </div>
+                        </div>
+
+                        <div class="member-card">
+                            <div class="member-image">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Japhet">
+                            </div>
+                            <div class="member-info">
+                                <h3>Japhet</h3>
+                                <div class="member-role">Former Member</div>
+                                <p>Japhet was known for his sharp wit and satirical takes on everyday situations in Rwanda.</p>
+                            </div>
+                        </div>
+
+                        <div class="member-card">
+                            <div class="member-image">
+                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="5K Etienne">
+                            </div>
+                            <div class="member-info">
+                                <h3>5K Etienne</h3>
+                                <div class="member-role">Former Member</div>
+                                <p>5K Etienne brought energy and vibrant character performances to the group during his time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Shows Page -->
+        <div id="shows" class="page">
+            <section class="shows">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Our Shows & Performances</h2>
+                    </div>
+                    <div class="shows-container">
+                        <div class="show-card">
+                            <div class="show-image">
+                                <img src="https://images.unsplash.com/photo-1501281667305-0d4ebd5b1c57?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Bigomba Guhinduka">
+                            </div>
+                            <div class="show-info">
+                                <h3>Bigomba Guhinduka</h3>
+                                <p>Our flagship show that combines comedy with social commentary. The title means "things must change" and addresses habits and behaviors that need improvement in society.</p>
+                                <button class="btn">Learn More</button>
+                            </div>
+                        </div>
+                        
+                        <div class="show-card">
+                            <div class="show-image">
+                                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Live Performances">
+                            </div>
+                            <div class="show-info">
+                                <h3>Live Performances</h3>
+                                <p>We host events in Kigali and other locations across Rwanda, drawing large audiences who come for an evening of laughter and reflection.</p>
+                                <button class="btn">View Schedule</button>
+                            </div>
+                        </div>
+                        
+                        <div class="show-card">
+                            <div class="show-image">
+                                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Social Media Skits">
+                            </div>
+                            <div class="show-info">
+                                <h3>Social Media Skits</h3>
+                                <p>Our short videos on YouTube, Facebook, and Instagram reach people beyond our physical shows, spreading laughter and messages to a wider audience.</p>
+                                <button class="btn">Watch Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title" style="margin-top: 4rem;">
+                        <h2>Upcoming Events</h2>
+                    </div>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <div class="event">
+                                <h3>Bigomba Guhinduka: Season Finale</h3>
+                                <p><i class="fas fa-calendar-alt"></i> December 15, 2023 | <i class="fas fa-map-marker-alt"></i> Kigali Convention Center</p>
+                                <p>Join us for the spectacular season finale of our flagship show, with special guests and surprises!</p>
+                            </div>
+                            <div class="event" style="margin-top: 2rem;">
+                                <h3>Comedy Night at Innovation Village</h3>
+                                <p><i class="fas fa-calendar-alt"></i> January 7, 2024 | <i class="fas fa-map-marker-alt"></i> Innovation Village, Kigali</p>
+                                <p>An intimate evening of comedy and conversation with the Daymakers team.</p>
+                            </div>
+                            <button class="btn" style="margin-top: 2rem;">View All Events</button>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Comedy Show">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <section class="contact">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Contact Us</h2>
+                    </div>
+                    <div class="contact-container">
+                        <div class="contact-info">
+                            <h3>Get In Touch</h3>
+                            <p>We'd love to hear from you! Whether you're interested in booking a show, collaborating, or just want to share your thoughts, feel free to reach out.</p>
+                            
+                            <div class="contact-details">
+                                <p><i class="fas fa-map-marker-alt"></i> Kigali, Rwanda</p>
+                                <p><i class="fas fa-phone"></i> +250 788 123 456</p>
+                                <p><i class="fas fa-envelope"></i> info@daymakers.rw</p>
+                                <p><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 5:00 PM</p>
+                            </div>
+                            
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                                <a href="#"><i class="fab fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form">
+                            <h3>Send Us a Message</h3>
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" placeholder="Enter your name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" placeholder="Enter your email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" id="subject" placeholder="What is this regarding?">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Your Message</label>
+                                    <textarea id="message" placeholder="Type your message here..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Daymakers Edutainment</h3>
+                    <p>Rwanda's premier comedy and entertainment group, blending education with entertainment to inspire positive change.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a class="nav-link" data-page="home">Home</a></li>
+                        <li><a class="nav-link" data-page="about">About Us</a></li>
+                        <li><a class="nav-link" data-page="members">Members</a></li>
+                        <li><a class="nav-link" data-page="shows">Shows</a></li>
+                        <li><a class="nav-link" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Kigali, Rwanda</p>
+                    <p><i class="fas fa-phone"></i> +250 788 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@daymakers.rw</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Daymakers Edutainment. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            // Function to switch pages
+            function switchPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show the selected page
+                document.getElementById(pageId).classList.add('active');
+                
+                // Update active link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // Close mobile menu if open
+                if (navLinks.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            }
+            
+            // Add click event to all navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    switchPage(pageId);
+                });
+            });
+            
+            // Add click event to buttons with data-page attribute
+            const pageButtons = document.querySelectorAll('[data-page]');
+            pageButtons.forEach(button => {
+                if (!button.classList.contains('nav-link')) {
+                    button.addEventListener('click', function() {
+                        const pageId = this.getAttribute('data-page');
+                        switchPage(pageId);
+                    });
+                }
+            });
+            
+            // Mobile menu toggle
+            const hamburger = document.querySelector(".hamburger");
+            const mobileNavLinks = document.querySelector(".nav-links");
+            
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                mobileNavLinks.classList.toggle("active");
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll(".nav-links a").forEach(link => {
+                link.addEventListener("click", () => {
+                    hamburger.classList.remove("active");
+                    mobileNavLinks.classList.remove("active");
+                });
+            });
+            
+            // Scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for scroll animation
+            document.querySelectorAll('.about-image, .member-card, .show-card').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
